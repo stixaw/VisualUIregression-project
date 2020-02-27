@@ -1,0 +1,21 @@
+version: "3"
+services:
+  storybook:
+    build: .
+    environment:
+      PORT: 3000
+    ports:
+      - 3000:3000
+  jest-puppeteer:
+    environment:
+      TEST_URL:  http://storybook:3000
+    build:
+      context: ./integration
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - storybook
+    command: "wait-for-it.sh storybook:3000 -- npm run test:integration"
+    volumes:
+      - ./integration/tests:/usr/src/app/tests
