@@ -4,18 +4,16 @@ services:
     build: .
     environment:
       PORT: 3000
+      NPM_TOKEN: $NPM_TOKEN
     ports:
       - 3000:3000
   jest-puppeteer:
     environment:
       TEST_URL:  http://storybook:3000
-    build:
-      context: ./integration
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
+      NPM_TOKEN: $NPM_TOKEN
+    build: ./integration
     depends_on:
       - storybook
-    command: "wait-for-it.sh storybook:3000 -- npm run test:integration"
+    command: "wait-for-it.sh -s -t 60 storybook:3000 -- npm run test:integration"
     volumes:
       - ./integration/tests:/usr/src/app/tests

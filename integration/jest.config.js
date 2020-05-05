@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'jest-puppeteer',
-  testRegex: './*\\.spec\\.js$',
-  setupFilesAfterEnv: ['./setupTests.js']
+  testRegex: './*\\.int\\.js$',
+  setupFilesAfterEnv: ['./setupTests.js'],
+  reporters: ['default']
 }

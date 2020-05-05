@@ -17,6 +17,10 @@ the expect is as simple as a jest html snapshot:
 from the root of the project in terminal:
 ``` make test ```
 
+### Updating the integration tests:
+
+``` make test-update ```
+
 This will run the storybook in the docker image for story book and then a second docker image for jest-puppeteer to run the specs.
 
 The first time we run a test it will create a new image snapshot to use as the baseline for subsequent test runs. The snapshots are stored in the integration/tests/__image_snapshots__
@@ -34,14 +38,14 @@ right side is new snapshot
 
 ## Example test file:
 
-this is a visual regression test for CHGButton:
+this is a visual regression test for PDEButton:
 it is similar to snapshot testing already available in jest.
 
 ```
 /* eslint-disable no-undef */
-const path = process.env.TEST_URL + '/iframe.html?id=chg-button--default'
+const path = process.env.TEST_URL + '/iframe.html?id=pde-button--default'
 
-describe('CHGButton', () => {
+describe('PDEButton', () => {
 
   beforeAll(async () => {
     await page.goto(path)
